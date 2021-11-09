@@ -1,0 +1,55 @@
+<%- include('./partials/base') %>
+
+<body>
+    <div class="container mt-2">
+        <header>
+          <h2>Welcome</h2>
+          <p>Here is the homepage for <%= serviceName %></p>
+        </header>
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            <div class="col">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Static Websites</h5>
+                  <p class="card-text">Deploy your own static website in seconds!</p>
+                  <a href="/sites" class="btn btn-primary">Get started</a>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Databases</h5>
+                  <p class="card-text">Provision a SQL database for your project.</p>
+                  <a href="{{ url_for("databases.list_dbs") }}" class="btn btn-primary">Get started</a>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Virtual Machines</h5>
+                  <p class="card-text">Set up a virtual machine for development and testing.</p>
+                  <a href="{{ url_for("virtual_machines.list_vms") }}" class="btn btn-primary">Get started</a>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">VPCs</h5>
+                  <p class="card-text">Set up a new VPC and associated Subnets.</p>
+                  <a href="{{ url_for("vpcs.list_vpcs") }}" class="btn btn-primary">Get started</a>
+                </div>
+              </div>
+            </div>
+        </div>
+        
+        <footer>
+          <hr>
+          <p><a href="<%= link %>">RISE</a></p>
+        </footer>
+    </div>
+</body>
+
+</html>

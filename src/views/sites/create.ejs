@@ -1,0 +1,46 @@
+<%- include('../partials/base') %>
+
+<body>
+    <div class="container p-2">
+      <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+          <span class="fs-3"><%= serviceName %></span>
+        </a>
+        <ul class="nav nav-pills">
+            <li class="nav-item fs-6"><a href="/sites" class="nav-link">Back to site directory</a></li>
+        </ul>
+      </header>
+    </div>
+    <section class="container-md px-4">
+        <div>
+        <header class="row gy-4">
+            <span class="fs-4">Create new static site</span>
+            <% if( expressFlash.length > 0 ) { %>
+                <div class="alert alert-danger" role="alert"><%= expressFlash %></div>
+                <% } %>
+            </header>
+        </div>
+    </section>
+
+    <section class="p-2">
+    <form method="post">
+        <div class="mb-3">
+        <label for="site-id" class="form-label">Name</label>
+        <input type="text" class="form-control" name="site-id" id="site-id" aria-describedby="nameHelp" required>
+        <div id="nameHelp" class="form-text">Choose a unique name as a label for your website</div>
+        </div>
+        <div class="mb-3">
+        <label for="file-url" class="form-label">File URL</label>
+        <input type="text" class="form-control" id="file-url" name="file-url">
+        </div>
+        <div class="mb-3">
+        <strong>OR</strong>
+        </div>
+        <div class="mb-3">
+        <label for="site-content" class="form-label">Content</label>
+        <textarea class="form-control" name="site-content" id="site-content" rows="5"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+    </section>
+</body>
