@@ -42,93 +42,95 @@ export const register = (app: express.Application) => {
         const resourceGroupNameBase="rise-ai-center";
         const resourceGroupLocation="westeurope";
 
-        const resourceGroup = new resources.ResourceGroup(resourceGroupNameBase);
-
-        // const containerGroup = new azure_native.containerinstance.ContainerGroup("containerGroup", {
-        //     containerGroupName: "containerGroup"+name,
-        //     containers: [{
-        //         command: [],
-        //         environmentVariables: [],
-        //         image: imageName,
-        //         name,
-        //         ports: [{
-        //             port: 80,
-        //         }],
-        //         resources: {
-        //             requests: {
-        //                 cpu: 2.0,
-        //                 // gpu: {
-        //                 //     count: 1,
-        //                 //     sku: "K80",
-        //                 // },
-        //                 memoryInGB: 3,
-        //             },
-        //         },
-        //         volumeMounts: [
-        //             {
-        //                 mountPath: "/tf/file-share",
-        //                 name: "volume1",
-        //                 readOnly: false,
-        //             },
-        //         ],
-        //     }],
-        //     // diagnostics: {
-        //     //     logAnalytics: {
-        //     //         logType: "ContainerInsights",
-        //     //         metadata: {
-        //     //             "test-key": "test-metadata-value",
-        //     //         },
-        //     //         workspaceId: "workspaceid",
-        //     //         workspaceKey: "workspaceKey",
-        //     //     },
-        //     // },
-        //     // dnsConfig: {
-        //     //     nameServers: ["1.1.1.1"],
-        //     //     options: "ndots:2",
-        //     //     searchDomains: "cluster.local svc.cluster.local",
-        //     // },
-        //     // identity: {
-        //     //     type: "SystemAssigned, UserAssigned",
-        //     //     userAssignedIdentities: {
-        //     //         "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity-name": {},
-        //     //     },
-        //     // },
-        //     imageRegistryCredentials: [],
-        //     ipAddress: {
-        //         dnsNameLabel: "dnsnamelabel1",
-        //         ports: [{
-        //             port: 80,
-        //             protocol: "TCP",
-        //         }],
-        //         type: "Public",
-        //     },
-        //     location: "westeurope",
-        //     networkProfile: {
-        //         id: "test-network-profile-id",
-        //     },
-        //     osType: "Linux",
-        //     resourceGroupName: resourceGroup.name,
-        //     volumes: [
-        //         {
-        //             azureFile: {
-        //                 shareName: "azureml-filestore-a3577153-b708-4da7-ba96-d3d8997a0cac",
-        //                 storageAccountKey: "MriEjRBX2ZUlZicz9cUzBhjEip9+W0urUYpLbza9JlnWO6NRRohqlymquhcjYIav7VvvjxhQgrfjipP5INjhIw==",
-        //                 storageAccountName: "riseaicenter9576892428",
-        //             },
-        //             name: "volume1",
-        //         },
-        //     ],
-        // });
+        const resourceGroup = new resources.ResourceGroup(resourceGroupNameBase, {
+            location: resourceGroupLocation,
+            // resourceGroupName: resourceGroupNameBase,
+        });
+        const containerGroup = new containerinstance.ContainerGroup("containerGroup", {
+            containerGroupName: "containerGroup"+name,
+            containers: [{
+                command: [],
+                environmentVariables: [],
+                image: imageName,
+                name,
+                ports: [{
+                    port: 80,
+                }],
+                resources: {
+                    requests: {
+                        cpu: 2.0,
+                        // gpu: {
+                        //     count: 1,
+                        //     sku: "K80",
+                        // },
+                        memoryInGB: 3,
+                    },
+                },
+                volumeMounts: [
+                    {
+                        mountPath: "/tf/file-share",
+                        name: "volume1",
+                        readOnly: false,
+                    },
+                ],
+            }],
+            // diagnostics: {
+            //     logAnalytics: {
+            //         logType: "ContainerInsights",
+            //         metadata: {
+            //             "test-key": "test-metadata-value",
+            //         },
+            //         workspaceId: "workspaceid",
+            //         workspaceKey: "workspaceKey",
+            //     },
+            // },
+            // dnsConfig: {
+            //     nameServers: ["1.1.1.1"],
+            //     options: "ndots:2",
+            //     searchDomains: "cluster.local svc.cluster.local",
+            // },
+            // identity: {
+            //     type: "SystemAssigned, UserAssigned",
+            //     userAssignedIdentities: {
+            //         "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity-name": {},
+            //     },
+            // },
+            imageRegistryCredentials: [],
+            ipAddress: {
+                dnsNameLabel: "dnsnamelabel1",
+                ports: [{
+                    port: 80,
+                    protocol: "TCP",
+                }],
+                type: "Public",
+            },
+            location: "westeurope",
+            networkProfile: {
+                id: "test-network-profile-id",
+            },
+            osType: "Linux",
+            resourceGroupName: resourceGroup.name,
+            volumes: [
+                {
+                    azureFile: {
+                        shareName: "azureml-filestore-a3577153-b708-4da7-ba96-d3d8997a0cac",
+                        storageAccountKey: "MriEjRBX2ZUlZicz9cUzBhjEip9+W0urUYpLbza9JlnWO6NRRohqlymquhcjYIav7VvvjxhQgrfjipP5INjhIw==",
+                        storageAccountName: "riseaicenter9576892428",
+                    },
+                    name: "volume1",
+                },
+            ],
+        });
 
         return {
-            result: resourceGroup.name,
+            result: containerGroup.ipAddress,
         };
     };
 
     // creates new sites
     const createHandler: express.RequestHandler = async (req, res) => {
         if (req.method === 'POST') {
-            console.log('log: ' + req.body)
+            console.log('log: ' + req.body['site-id'])
             const stackName = req.body['site-id'];
             const content = req.body['site-content'] as string;
             try {
@@ -184,6 +186,49 @@ export const register = (app: express.Application) => {
             expressFlash: req.flash('vError')
         });
     };
+
+    // update a site
+    const updateHandler: express.RequestHandler = async (req, res) => {
+        console.log('log: ' + req.params.id)
+        const stackName = req.params.id;
+        return res.redirect(301,'/sites');
+    };
+
+    // deletes a site
+    const deleteHandler: express.RequestHandler = async (req, res) => {
+        console.log('log: ' + req.body['name']);
+        const stackName = req.body['name'];
+        try {
+            // select the existing stack
+            const stack = await LocalWorkspace.selectStack({
+                stackName,
+                projectName,
+                // don't need a program for destroy
+                program: async () => { return; },
+            });
+            // deploy the stack, tailing the logs to console
+            await stack.destroy({ onOutput: console.info });
+            await stack.workspace.removeStack(stackName);
+            req.flash('vError',`Successfully deleted site "${stackName}"`);
+            } catch (e) {
+                if (e instanceof StackNotFoundError) {
+                    req.flash('vError',`Error: Site with name "${stackName}" does not exist`);
+                    return res.redirect(301, '/sites');
+                } else {
+                    req.flash('vError',`Error: "${e}" `);
+                    return res.redirect(301, '/sites');
+                }
+            }
+        return res.redirect(301,'/sites');
+    };
+
+    const ensurePlugins = async () => {
+        const ws = await LocalWorkspace.create({});
+        await ws.installPlugin("azure-native", "v1.45.0");
+    };
+    // install necessary plugins once upon boot
+    ensurePlugins();
+
     // setup the routes
     app.get("/", (req: any, res) => {
         res.render("index", {
@@ -192,6 +237,8 @@ export const register = (app: express.Application) => {
     app.post("/sites/create", createHandler);
     app.get("/sites/create", createHandler);
     app.get("/sites", listHandler);
+    app.get("/sites/update", updateHandler);
+    app.post("/sites/delete", deleteHandler);
 };
 
     // // Create a bucket and expose a website index document

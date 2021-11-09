@@ -33,7 +33,7 @@
                 </div>
                 </div>
             </div>
-            <% } %>
+            <% } else { %>
             <% sites.forEach(function(site) { %>
                 <tr>
                 <td class="align-bottom" colspan="4">
@@ -43,12 +43,13 @@
                 </td>
                 <td>
                     <div class="float-end p-1">
-                        <input class="btn btn-sm btn-danger" type="submit" value="Delete">
-                        <form action="<%= 'sites/delete?id=' + site.name %>" method="post">
+                        <form action="/sites/delete" method="post">
+                        <input type="hidden" name="name" value="<%= site.name %>">
+                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
                     </form>
                     </div>
                     <div class="float-end p-1">
-                        <form action="<%= 'sites/update?id=' + site.name %>" method="get">
+                        <form action="<%- '/sites/update?id='+site.name -%>" method="get">
                         <input class="btn btn-sm btn-primary" type="submit" value="Edit">
                     </form>
                     </div>
@@ -57,7 +58,7 @@
                     </div>
                 </td>
                 </tr>
-            <% }); %>
+            <% });  } %>
             </tbody>
         </table>
         </div>

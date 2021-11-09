@@ -5,6 +5,7 @@
     ],
     "jsRules": {},
     "rules": {
+        "no-string-literal": {"severity": "warning"},
         "no-console": {"severity": "warning"},
         "indent": [ true, "spaces" ],
         "trailing-comma": [ false ]
