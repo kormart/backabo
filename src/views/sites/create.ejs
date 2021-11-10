@@ -7,14 +7,14 @@
           <span class="fs-3"><%= serviceName %></span>
         </a>
         <ul class="nav nav-pills">
-            <li class="nav-item fs-6"><a href="/sites" class="nav-link">Back to site directory</a></li>
+            <li class="nav-item fs-6"><a href="/sites" class="nav-link">Back to resource directory</a></li>
         </ul>
       </header>
     </div>
     <section class="container-md px-4">
         <div>
         <header class="row gy-4">
-            <span class="fs-4">Create new static site</span>
+            <span class="fs-4">Create new resource</span>
             <% if( expressFlash.length > 0 ) { %>
                 <div class="alert alert-danger" role="alert"><%= expressFlash %></div>
                 <% } %>
@@ -27,7 +27,7 @@
         <div class="mb-3">
         <label for="site-id" class="form-label">Name</label>
         <input type="text" class="form-control" name="site-id" id="site-id" aria-describedby="nameHelp" required>
-        <div id="nameHelp" class="form-text">Choose a unique name as a label for your website</div>
+        <div id="nameHelp" class="form-text">Choose a unique name as a label for your resource</div>
         </div>
         <div class="mb-3">
         <label for="file-url" class="form-label">File URL</label>
