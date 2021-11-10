@@ -134,10 +134,10 @@ export const register = (app: express.Application) => {
                 // deploy the stack, tailing the logs to console
                 const upRes = await stack.up({ onOutput: console.info });
                 // res.json({ id: stackName, url: upRes.outputs.websiteUrl.value });
-                req.flash('vError',`Successfully created resource "${stackName}", with ip address: "${upRes.outputs.result.value}" and url: "${stackName}.westeurope.azurecontainer.io:8888/lab"!`);
+                req.flash('vError',`Successfully created environment "${stackName}", with ip address: "${upRes.outputs.result.value}" and url: "${stackName}.westeurope.azurecontainer.io:8888/lab"!`);
             } catch (e) {
                 if (e instanceof StackAlreadyExistsError) {
-                    req.flash('vError',`Error: Resource with name "${stackName}" already exists`);
+                    req.flash('vError',`Error: Environment with name "${stackName}" already exists`);
                     return res.redirect(301, '/sites');
                 } else {
                     req.flash('vError',`Error: "${e}" `);
@@ -197,10 +197,10 @@ export const register = (app: express.Application) => {
             // deploy the stack, tailing the logs to console
             await stack.destroy({ onOutput: console.info });
             await stack.workspace.removeStack(stackName);
-            req.flash('vError',`Successfully deleted resource "${stackName}"`);
+            req.flash('vError',`Successfully deleted environment "${stackName}"`);
             } catch (e) {
                 if (e instanceof StackNotFoundError) {
-                    req.flash('vError',`Error: Resource with name "${stackName}" does not exist`);
+                    req.flash('vError',`Error: Environment with name "${stackName}" does not exist`);
                     return res.redirect(301, '/sites');
                 } else {
                     req.flash('vError',`Error: "${e}" `);

@@ -7,14 +7,14 @@
           <span class="fs-3"><%= serviceName %></span>
         </a>
         <ul class="nav nav-pills">
-            <li class="nav-item fs-6"><a href="/sites/create") }}" class="nav-link active">Create resource</a></li>
+            <li class="nav-item fs-6"><a href="/sites/create") }}" class="nav-link active">Create environment</a></li>
         </ul>
       </header>
     </div>
     <section class="container-md px-4">
         <div>
         <header class="row gy-4">
-            <span class="fs-4">Resource Directory</span>
+            <span class="fs-4">Current environments</span>
             <%if ( expressFlash.length >0 ) { %>
             <div class="alert alert-danger" role="alert"><%= expressFlash %></div>
             <% } %>
@@ -28,8 +28,8 @@
             <div class="container gy-5">
                 <div class="row py-4">
                 <div class="alert alert-secondary" role="alert">
-                    <p>No resources are currently deployed. Create one to get started!</p>
-                    <a href="sites/create") }}" class="btn btn-primary">Create static site</a>
+                    <p>No environments are currently deployed. Create one to get started!</p>
+                    <a href="sites/create") }}" class="btn btn-primary">Create environment</a>
                 </div>
                 </div>
             </div>
