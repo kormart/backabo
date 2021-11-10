@@ -39,7 +39,7 @@ export const register = (app: express.Application) => {
     // a Azure ACI container
     const createPulumiProgram = (name: string, imageName: string) => async () => {
 
-        const resourceGroupNameBase="rise-ai-center";
+        const resourceGroupNameBase="rise-ai-center-test";
         const resourceGroupLocation="westeurope";
 
         const resourceGroup = new resources.ResourceGroup(resourceGroupNameBase, {
@@ -54,7 +54,7 @@ export const register = (app: express.Application) => {
                 image: imageName,
                 name,
                 ports: [{
-                    port: 80,
+                    port: 8888,
                 }],
                 resources: {
                     requests: {
@@ -99,15 +99,15 @@ export const register = (app: express.Application) => {
             ipAddress: {
                 dnsNameLabel: "dnsnamelabel1",
                 ports: [{
-                    port: 80,
+                    port: 8888,
                     protocol: "TCP",
                 }],
                 type: "Public",
             },
             location: "westeurope",
-            networkProfile: {
-                id: "test-network-profile-id",
-            },
+            // networkProfile: {
+            //     id: "test-network-profile-id",
+            // },
             osType: "Linux",
             resourceGroupName: resourceGroup.name,
             volumes: [
@@ -123,19 +123,19 @@ export const register = (app: express.Application) => {
         });
 
         return {
-            result: containerGroup.ipAddress,
+            result: containerGroup.ipAddress.ip,
         };
     };
 
     // creates new sites
     const createHandler: express.RequestHandler = async (req, res) => {
         if (req.method === 'POST') {
-            console.log('log: ' + req.body['site-id'])
+            // console.log('log: ' + req.body['site-id'])
             const stackName = req.body['site-id'];
             const content = req.body['site-content'] as string;
             try {
                 // create a new stack
-                console.log('log: '+stackName)
+                // console.log('log: '+stackName)
                 const stack = await LocalWorkspace.createStack({
                     stackName,
                     projectName,
@@ -146,7 +146,7 @@ export const register = (app: express.Application) => {
                 // deploy the stack, tailing the logs to console
                 const upRes = await stack.up({ onOutput: console.info });
                 // res.json({ id: stackName, url: upRes.outputs.websiteUrl.value });
-                req.flash('vError',`Successfully created site "${stackName}", with ip address ${upRes.outputs}!`);
+                req.flash('vError',`Successfully created site "${stackName}", with ip address ${upRes.outputs.result.value}!`);
             } catch (e) {
                 if (e instanceof StackAlreadyExistsError) {
                     req.flash('vError',`Error: Site with name "${stackName}" already exists`);

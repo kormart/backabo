@@ -4,8 +4,127 @@
     <div class="container mt-2">
         <header>
           <h2>Welcome</h2>
-          <p>Here is the homepage for <%= serviceName %></p>
+          <p>This is the starting page for <%= serviceName %>!</p>
+          <hr>
         </header>
+
+        <div class="row">
+          <div class="col-3 p-4">
+            <h4> DATASETS / STORAGE </h4>
+          </div>
+          <div class="col-3 p-4">
+            <h4> APPLICATIONS / FUNCTIONS / MODELS </h4>
+          </div>
+          <div class="col-3 p-4">
+            <h4> INFRASTRUCTURE RESOURCES </h4>
+          </div>
+        </div>
+
+        <div class="row">
+        <!-- DATASETS / STORAGE -->
+            <div class="col-3 p-4">
+              <div class="row">
+                <div class="card mb-3" style="width: 18rem;">
+                  <img src="/datalab.png" style="width: 6rem;" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title">Dataset</h5>
+                    <p class="card-text">Agriculture field measurements</p>
+                    <a href="/sites" class="btn btn-primary">Choose</a>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="card mb-3" style="width: 18rem;">
+                  <img src="/swedish_space_datalab.jpeg" style="width: 6rem;" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title">Dataset</h5>
+                    <p class="card-text">Satelite images</p>
+                    <a href="/sites" class="btn btn-primary">Choose</a>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="card mb-3" style="width: 18rem;">
+                  <!-- <img src="/swedish_space_datalab.jpeg" style="width: 6rem;" class="card-img-top" alt="..."> -->
+                  <div class="card-body">
+                    <h5 class="card-title">File system</h5>
+                    <p class="card-text">NLP project</p>
+                    <a href="/sites" class="btn btn-primary">Choose</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+        <!-- APPS -->
+            <div class="col-3 p-4">
+              <div class="row">
+                <div class="card mb-3" style="width: 18rem;">
+                  <img src="/hopsworks.svg" style="width: 14rem;" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title">Hopsworks</h5>
+                    <p class="card-text">A complete data science environment</p>
+                    <a href="/sites" class="btn btn-primary">Choose</a>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="card mb-3" style="width: 18rem;">
+                  <img src="datalab.png" style="width: 6rem;" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title">Pre-trained ML Model</h5>
+                    <p class="card-text">Image recognition of weeds</p>
+                    <a href="/sites" class="btn btn-primary">Choose</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+        <!-- RESOURCES -->
+            <div class="col-3 p-4">
+              <div class="row">
+                <div class="card mb-3" style="width: 18rem;">
+                  <img src="/ice.png" style="width: 8rem;" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title">ICE (by RISE)</h5>
+                    <p class="card-text">Kubernetes clusters. (Compliance code: EU, Cost: ...)</p>
+                    <a href="/sites" class="btn btn-primary">Choose</a>
+                  </div>
+                </div>
+                </div>
+              <div class="row">
+                <div class="card mb-3" style="width: 18rem;">
+                  <img src="/Logo_City-Network_Part-of-Iver_On-black_Web_2020.png" style="width: 12rem;" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title">CityNetwork Virtual Machines</h5>
+                    <p class="card-text">(Compliance code: EU, Cost: ...)</p>
+                    <a href="/sites" class="btn btn-primary">Choose</a>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="card mb-3" style="width: 18rem;">
+                  <img src="/azure-native.svg" style="width: 5rem;" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title">Azure Virtual Machines GPU</h5>
+                    <p class="card-text">NVIDIA A100 TensorCore, 40GB/GPU. (Compliance code: non-EU, Cost: ...)</p>
+                    <a href="/sites" class="btn btn-primary">Choose</a>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="card mb-3" style="width: 18rem;">
+                  <img src="/aws.svg" style="width: 6rem;" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title">Virtual Machines</h5>
+                    <p class="card-text">(Compliance code: non-EU, Cost: ...)</p>
+                    <a href="/sites" class="btn btn-primary">Choose</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex" style="height: 200px;">
+              <div class="vr"></div>
+            </div>
+        </div>
+
         <div class="row row-cols-1 row-cols-md-2 g-4">
             <div class="col">
               <div class="card">
@@ -21,7 +140,7 @@
                 <div class="card-body">
                   <h5 class="card-title">Databases</h5>
                   <p class="card-text">Provision a SQL database for your project.</p>
-                  <a href="{{ url_for("databases.list_dbs") }}" class="btn btn-primary">Get started</a>
+                  <a href="/sites" class="btn btn-primary">Get started</a>
                 </div>
               </div>
             </div>
@@ -30,7 +149,7 @@
                 <div class="card-body">
                   <h5 class="card-title">Virtual Machines</h5>
                   <p class="card-text">Set up a virtual machine for development and testing.</p>
-                  <a href="{{ url_for("virtual_machines.list_vms") }}" class="btn btn-primary">Get started</a>
+                  <a href="/sites" class="btn btn-primary">Get started</a>
                 </div>
               </div>
             </div>
