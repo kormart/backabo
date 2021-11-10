@@ -13,18 +13,9 @@ import {resources, containerinstance} from "@pulumi/azure-native";
 
 export const register = (app: express.Application) => {
 
-    // interface Site {
-    //     name: string;
-    //     url: string;
-    // }
     // Pulumi info
     const projectName = "backabo";
     const stackNameTest = 'backabo-test-stack';
-
-    // Azure account details
-    // sub="d818cbed-274b-4240-9872-8761fe9e488c"
-    // storageAccountName="riseaicenter9576892428"
-    // resourceGroupNameStorage="rise-ai-center"
 
     // Site info
     const subject = 'Backabo';
