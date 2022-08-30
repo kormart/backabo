@@ -1,3 +1,17 @@
+# Pulumi stack files
+**/Pulumi*
+
+# configuration file
+setup.sh
+
+**/.svelte-kit/*
+**/bin/*
+**/node_modules/*
+**/dist/*
+**/build/*
+**/package-lock.json
+**/yarn.lock
+
 # Logs
 logs
 *.log
@@ -69,8 +83,9 @@ typings/
 .yarn-integrity
 
 # dotenv environment variables file
-.env
-.env.test
+**/.env
+**/.env/*
+**/.env.test/*
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache

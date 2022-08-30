@@ -1,0 +1,19 @@
+{
+  "name": "backabo-event_service",
+  "version": "1.0.0",
+  "main": "./bin/event-service.js",
+  "repository": "github.com/kormart/backabo",
+  "author": "Martin Korling",
+  "license": "MIT",
+  "dependencies": {
+    "@pulumi/pulumi": "^3.38.0",
+    "process": "^0.11.10",
+    "ws": "^8.8.1",
+    "node-fetch-commonjs": "^3.1.1"
+  },
+  "scripts": {
+    "dev": "nodemon -e js,ts --watch index.ts --exec \"yarn start\"",
+    "build": "tsc --diagnostics --incremental",
+    "start": "node ./bin/event-service.js"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "backabo-frontend",
+  "repository": "github.com/kormart/backabo",
+  "author": "Martin Korling",
+  "license": "MIT",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "svelte-kit dev --port 3000 --host 0.0.0.0",
+    "build": "svelte-kit build",
+    "preview": "svelte-kit preview --port 3000"
+  },
+  "devDependencies": {
+    "@sveltejs/adapter-node": "^1.0.0-next.86",
+    "@sveltejs/kit": "^1.0.0-next.328",
+    "svelte": "^3.49.0"
+  },
+  "type": "module",
+  "dependencies": {
+    "cookie": "^0.4.1",
+    "node-fetch": "^2.6.1"
+  }
+}
