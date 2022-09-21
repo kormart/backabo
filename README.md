@@ -23,3 +23,7 @@ The backend is an Express server that serves endpoints for the operations: list,
 https://www.pulumi.com/docs/
 
 The Pulumi CLI must be installed. The Pulumi plugins are determined by the package.json file.
+
+## Event service
+
+A Websocket server that waits for the Frontend to make connection. Then it reads state data from Pulumi and sets up timers. It then starts to send messages back to the Frontend. At time-out a stack is deleted using the Pulumi automation API. 
