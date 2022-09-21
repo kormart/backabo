@@ -2,7 +2,7 @@
 
 This is an experimental project, meant for functional usage validation. There has been very little non-functional testing.
 
-This is a multi-cloud environment service built on top of Pulumi. The frontend is built with SvelteKit, the backend is an Express server that uses the Pulumi automation api, and there is av event-service using websockets. The README files in the respective folders give more references.
+This is a multi-cloud environment service built on top of Pulumi. The frontend is built with SvelteKit, the backend is an Express server that uses the Pulumi automation api, and there is an event-service that uses Websockets. The README files in the respective folders give more references.
 
 The service depends on a set of environment variables (containing credentials and configurations for the cloud resource providers) that are assumed to be defined in a file setup.sh, which is not included in this repo.
 
@@ -18,6 +18,6 @@ The backend is an Express server that serves endpoints for the operations: list,
 
 ## Pulumi
 
-The Pulumi CLI must be installed. 
 https://www.pulumi.com/docs/
-The Pulumi plugins are determined by the package.json file.
+
+The Pulumi CLI must be installed. The Pulumi plugins are determined by the package.json file.
