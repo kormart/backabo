@@ -6,19 +6,24 @@ import {
     StackNotFoundError
 } from "@pulumi/pulumi/automation";
 import * as express from "express";
-import { createPulumiProgram } from "./factory"
+import { createPulumiProgram, createCustomProgram } from "./factory";
 import { env } from 'process';
-
-// this is a global value that we use inside the createHandler to extract
-// parameters for the user's selection
-import smorgasbord from "./smorgasbord.js";
+import { readFile } from 'fs/promises';
+import { projectName } from './constants';
 
 // TODO, get this from a global variable inside app-object;
-const projectName = "backabo";
+// const projectName = "backabo";
+// type Smorgasbord = {
+//     dataset: any,
+//     tool: any,
+//     infra: any
+// };
 
 // serve the smorgasbord
 export const smorgasbordHandler: express.RequestHandler = async (req, res) => {
     console.log("***log: get smorgasbord ");
+    const data = await readFile('./routes/smorgasbord.json', 'utf8');
+    const smorgasbord = JSON.parse(data);
     res.json({smorgasbord: smorgasbord});
 };
 
@@ -31,7 +36,11 @@ export const createHandler: express.RequestHandler = async (req, res) => {
     console.log("***log: create " + projectName2 + ", "+ stackName + ", " + envLifeTime + ", " + JSON.stringify(selectedIndices));
     const ws = await LocalWorkspace.create({workDir: env.PWD, projectSettings: { name: projectName, runtime: "nodejs" }});
     console.log("***log: workspace settings (cH) ", await ws.projectSettings());
+
     // get parameters for selection from smorgasbord
+    const data = await readFile('./routes/smorgasbord.json', 'utf8');
+    const smorgasbord = JSON.parse(data);
+    // console.log("***log: smorgasbord: ", smorgasbord);
     Object.keys(selectedIndices).forEach(comp => {
         selectedIndices[comp] = parseInt(selectedIndices[comp])
     });
@@ -52,6 +61,12 @@ export const createHandler: express.RequestHandler = async (req, res) => {
         // await stack.setConfig("azure-native:region", { value: "westeurope" });
         // deploy the stack, tailing the logs to console
         const upRes = await stack.up({ onOutput: console.info });
+        // how to support native resources that are not included in pulumi providers
+        // but still use pulumi as a backend for config state
+        // we can create a stack with an empty pulumi program and execute code from the factory
+        // what should be the delete action, just delete the stack
+        const custom = createCustomProgram(selected, stackName);
+        custom();
         const startupTime = ((Date.now() - startTime.getTime())/60000).toString(); // minutes
         // an env object collecting all params
         const envObjParams = {user: 'rise-ai-user-1', group: 'rise-ai-group-1', selection: JSON.stringify(selected), startTime: startTime.toISOString(), envLifeTime, startupTime};
@@ -72,20 +87,30 @@ export const createHandler: express.RequestHandler = async (req, res) => {
 };
 // lists all sites
 export const listHandler: express.RequestHandler = async (req, res) => {
+    var stacks: any[];
+    var ws: any;
     try {
         // set up a workspace with only enough information for the list stack operations
-        // const ws = await LocalWorkspace.create({ projectSettings: { name: projectName, runtime: "nodejs" } });
-        let stacks: any[];
-        const ws = await LocalWorkspace.create({workDir: env.PWD, projectSettings: { name: projectName, runtime: "nodejs" }});
+        ws = await LocalWorkspace.create({workDir: env.PWD, projectSettings: {name: projectName, runtime: "nodejs" }});
         console.log("***log: workspace settings (lH) ", await ws.projectSettings());
-        try {
-            stacks = await ws.listStacks();
-            console.log("*** log: stack: (inside try) ", stacks);
-        } catch(e) {
-            console.log("***log: error: ", e);
+    } catch(e) {
+        console.log("***log: error LocalWorkspace create: ", e);
+    }
+    try {
+        stacks = await ws.listStacks();
+        // next line used to trigger error for testing purposes
+        // const config = await ws.getAllConfig('dummy');
+        console.log("*** log: listHandler, listStacks: (inside try) ", stacks);
+    } catch(e) {
+        console.log("***log: error listStacks: ", e);
+        if (e instanceof StackNotFoundError) {
+            res.status(404).send(`stack not found`);
+            return;
+        } else {
+            res.status(500).send(e);
         }
-        // const envs = stacks.map(s => ({"name": s.name, "url": s.url, "expiryTime": "03:00"}) );
-        // console.log("*** log: stack: (outside try) ", stacks);
+    }
+    try {
         const envs = await Promise.all(stacks.map(async s => {
             return {
                 name: s.name, 

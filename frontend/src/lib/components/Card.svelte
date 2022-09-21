@@ -43,7 +43,7 @@
     max-width: 14rem;
     border: 1px solid;
     border-color: lightgrey;
-    border-radius: 20px;
+    border-radius: 10px;
     --tw-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
       0 10px 10px -5px rgba(0, 0, 0, 0.04);
     box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
@@ -57,6 +57,7 @@
   .comp-name {
     font-size: 20px;
     font-weight: bold;
+    margin: -2px 0 -2px 0;
     /* margin-top: 15px; */
   }
   .comp-descr {
@@ -74,6 +75,7 @@
   .detail-field {
     font-size: 15px;
     font-weight: bold;
+    margin: -2px 0 -20px -20px;
   }
 
   .detail-field:not(:last-child) {

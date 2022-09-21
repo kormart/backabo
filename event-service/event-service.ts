@@ -29,7 +29,7 @@ import { env } from 'process';
 const projectName = "backabo";
 let envs: any[];
 let events: Event[];
-const workDir = "/Users/martinko/Code/pulumi-typescript-dev/pulumiOverHttp-ts";
+const workDir = "/Users/martinko/Code/backabo/backend";
 
 // this is the same initialization as in the backabo backend server
 const initializeWorkspace = async () => {

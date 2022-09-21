@@ -1,3 +1,7 @@
+import { error } from '@sveltejs/kit';
+import { json } from '@sveltejs/kit';
+/** @type {import('./$types').RequestHandler} */
+
 //  Endpoint for Backabo backend
 
 const base = 'http://localhost:1337';

@@ -1,6 +1,7 @@
-<script>
+<script  lang="ts">
   	import { onMount } from 'svelte';
     import state from '$lib/stores';
+    import { browser } from '$app/env';
 
     import Environment from "./Environment.svelte"
     export let environments
@@ -14,36 +15,28 @@
       page = "New";
     }
 
-
-    // add observed variable as an argument to trigger update 
-    async function fetchEnvironments() {
-        const response = await fetch(
-            "http://localhost:1337/sites"
-        );
-      const data = await response.json();
-      environments = data.envs;
-      needToFetch = false;
-      console.log("***log: fetchEnvironments: environments:", environments);
-    }
-
     $: if (needToFetch) {
       console.log("***log: Current main: needToFetch:", needToFetch, fetchEnvironments());
     }
 
-    async function fetchEnvironmentsNew() {
-        const response = await fetch(
-          '/api/simple'
-        );
-    const data = await response.json();
-    environments = data.envs;
-    needToFetch = false;
-    console.log("***log: fetchEnvironmentsNew: environments:", environments);
+    async function fetchEnvironments() {
+      if (browser) {
+        try {
+          const response = await fetch('/api/backend');
+          const data = await response.json();
+          environments = data.envs.envs;
+          needToFetch = false;
+          console.log("***log: fetchEnvironmentsNew: environments:", environments);
+          return;
+        } catch (error) {
+          console.log('Error in fetchEnvironment', error);
+          return;
+        }
+      }
     }
 
 </script>
 
-<button type="button" class="btn btn-friendly" on:click={() => (page = "New")}>NEW ENVIRONMENT</button>
-<hr>
 <h2>Current environments</h2>
 {#if environments.length === 0}
 	<h3>No environments...</h3>
@@ -62,13 +55,16 @@
 <style>
   .grid {
     display: flex;
-	flex-direction: column;
+	  flex-direction: column;
     /* grid-template-columns: repeat(3, 300px); */
     gap: 30px;
 	/* text-align: center; */
 	/* grid-auto-rows: 11% ;
 	grid-template-rows: unset;
 	overflow: scroll; */
+  }
+  .new-button {
+    float: right
   }
   .btn {
     border-radius: 7px;

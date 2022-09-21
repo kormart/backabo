@@ -26,6 +26,10 @@
 		console.log("***log: delete response: " + JSON.stringify(json));
 		needToFetch = true;
   }
+  if (!!environment.configs['ns:environment']) {
+    provider = JSON.parse(JSON.parse(environment.configs['ns:environment'].value).selection).infra.provider;
+ 
+  }
   if (!!environment.export.deployment.resources) {
     if (!!environment.export.deployment.resources[2]) {
       provider = environment.export.deployment.resources[2].type.split(':')[0]
@@ -41,17 +45,17 @@
     case 'azure':
       imgFilename = 'azure-native.svg'
       break;
-    case 'equinix':
-      imgFilename = 'equinix.svg'
+    case 'equinix-metal':
+      imgFilename = 'equinix.png'
       break;
     case 'cleura':
-      imgFilename = 'cleura.svg'
+      imgFilename = 'cleura.png'
       break;
     case 'test':
-      imgFilename = 'ice.png'
+      imgFilename = 'equinix.png'
       break;
     case '':
-      imgFilename = 'ice.png'
+      imgFilename = 'gcp.png'
       provider = 'test'
       break;
     default:
@@ -132,8 +136,8 @@
 
   .env-image {
     flex: 3;
-    max-width: 3rem;
-    padding: 10px;
+    max-width: 4.5rem;
+    padding: 20px;
     /* margin-top: 10px; */
   }
   .env-descr {

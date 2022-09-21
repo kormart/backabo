@@ -42,7 +42,7 @@
   }
   // console.log('***log data 3rd time: ', getIt());
 
-  export let selection = {dataset: "nothing selected", tool: "nothing selected", infra: "nothing selected"};
+  export let selection = {dataset: "", tool: "", infra: ""};
 
   // async function fetchEnvironmentsNew() {
   //       const response = await fetch(
@@ -58,9 +58,13 @@
 </script>
 
 <h1>Backabo self-service environments</h1>
+<hr>
 {#if user}
   <!-- <h2>Logged in as {user}</h2> -->
     {#if page === "Current"}
+      <div class="new-button">
+        <button type="button" class="btn btn-friendly" on:click={() => (page = "New")}>NEW ENVIRONMENT</button>
+      </div>
       <Current {environments} bind:needToFetch={needToFetch} bind:page={page}/>
     {:else if page === "New"}
       <New {smorgasbord} {selection} bind:needToFetch={needToFetch} bind:page={page}/>
@@ -78,3 +82,24 @@
     <button>Login using Github</button>
   </form>
 {/if}
+
+<style>
+.new-button {
+  position: absolute;
+  right: 100px;
+}
+.btn {
+  border-radius: 7px;
+  font-family: 'Courier New', monospace;
+  font-size: 15px;
+  padding: 10px;
+}
+.btn-danger {
+  background-color: #df1839;
+  color: #ffffff;
+}
+.btn-friendly {
+  background-color: #339152;
+  color: #ffffff;
+}
+</style>

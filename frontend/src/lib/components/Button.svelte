@@ -1,10 +1,24 @@
 <script>
-	export let type = 'button';
+	import { getContext } from 'svelte';
+	import { BUTTON_GROUP } from './ButtonGroup.svelte';
+	const { selectButton, values } = getContext(BUTTON_GROUP);
+	
+	export let value;
+	export let active = true;
+	$: active = $values.includes(value);
 </script>
 
-<button
-	{type}
-	class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
->
+<style>
+	button {
+		border-radius: 12px;
+		font-size: small;
+	}
+	.active {
+		background-color: #f5a9ab;
+		color: white;
+	}
+</style>
+
+<button on:click={() => selectButton(value)} class:active>
 	<slot />
 </button>

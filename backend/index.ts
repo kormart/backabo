@@ -8,7 +8,6 @@ import {
 import * as express from "express";
 import * as cors from "cors";
 import * as path from "path";
-import * as fs from 'fs';
 import * as https from 'https';
 import { env } from 'process';
 import * as test from "./routes/test";
@@ -17,9 +16,9 @@ import * as sites from "./routes/sites";
 // TODO, put this in a global variable inside app-object;
 const projectName = "backabo";
 
-const initializeWorkspace = async () => {
+const initialRuntimeTests = async () => {
+    // try to trigger as many setup failures as possible that should not reach the users
     // set a working directory, where each stack has a yaml file holding config values
-    // this ws value needs to be global (?)
     console.log("***log: using directory ", env.PWD);
     var ws = await LocalWorkspace.create({workDir: env.PWD, projectSettings: { name: projectName, runtime: "nodejs" }});
     console.log("***log: workspace settings (iW) ", await ws.projectSettings());
@@ -27,10 +26,7 @@ const initializeWorkspace = async () => {
 };
 
 // install necessary plugins once upon boot
-initializeWorkspace();
-// console.log("***log: using directory ", env.PWD);
-// var ws = LocalWorkspace.create({workDir: env.PWD, projectSettings: { name: projectName, runtime: "nodejs" }});
-// console.log("***log: workspace settings (iW) ", globalThis.ws.projectSettings());
+initialRuntimeTests();
 
 // configure express
 const app = express();

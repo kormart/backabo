@@ -6,19 +6,25 @@
   "license": "MIT",
   "main": "./bin/index.js",
   "dependencies": {
+    "@pulumi/aws": "^5.10.0",
     "@pulumi/azure-native": "^1.60.0",
+    "@pulumi/equinix-metal": "^3.2.1",
     "@pulumi/gcp": "^6.30.0",
-    "@pulumi/rancher2": "^3.6.1",
     "@pulumi/pulumi": "^3.35.0",
-    "@types/express": "^4.17.8",
+    "@pulumi/rancher2": "^3.6.1",
+    "@types/express": "^4.17.13",
+    "@types/mime": "3.0.0",
     "@types/node": "^14.11.7",
-    "express": "^4.17.1",
     "cors": "^2.8.5",
+    "express": "^4.17.1",
     "node-fetch-commonjs": "^3.1.1"
   },
   "scripts": {
     "dev": "nodemon -e js,ts --watch index.ts --exec \"yarn start\"",
     "build": "tsc --diagnostics --incremental",
     "start": "node ./bin/index.js"
+  },
+  "devDependencies": {
+    "@google-cloud/aiplatform": "^2.1.0"
   }
 }
