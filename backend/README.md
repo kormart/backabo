@@ -1,9 +1,8 @@
 # Backabo backend
 
-This is an express server that receives requests from the frontend and executes commands towards the Pulumi Automation API.
+This is an Express server that receives requests from the frontend and executes commands towards the Pulumi Automation API.
 
 For more dynamic functionality, the plan is to call resource provider apis directly. There is a placeholder handler for a start/stop function.
-
 
 
 ## Reference, Acknowledgement
