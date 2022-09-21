@@ -1,6 +1,6 @@
 # Backabo self-service environments
 
-This is an experimental project, meant for functional usage validation. There has been very little non-functional testing.
+This project is in an experimental phase, meant for functional usage validation. There has been very little non-functional testing.
 
 This is a multi-cloud environment service built on top of Pulumi. The frontend is built with SvelteKit, the backend is an Express server that uses the Pulumi automation api, and there is an event-service that uses Websockets. The README files in the respective folders give more references.
 
@@ -9,6 +9,8 @@ The service depends on a set of environment variables (containing credentials an
 The service depends on that Pulumi is installed and configured, for testing purposes with a local file state store, no Pulumi subscription is needed.
 
 ## Frontend
+
+https://kit.svelte.dev/docs/introduction
 
 The frontend is built with SvelteKit. SvelteKit has its own backend (Backend-for-frontend pattern) that helps with calls to the actual backend in a secure way.
 
