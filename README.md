@@ -30,7 +30,7 @@ A Websocket server that waits for the Frontend to make connection. Then it reads
 
 ## System architecture
 
-<img src="./docs/backabo-arch.png" width="200" height="200" />
+<img src="./docs/backabo-arch.png" width="400" />
 
 ## User interface
 
