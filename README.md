@@ -30,10 +30,12 @@ A Websocket server that waits for the Frontend to make connection. Then it reads
 
 ## System architecture
 
-![system architecture](./docs/backabo.png)
+![system architecture](./docs/backabo-arch.png)
 
 ## User interface
 
+Showing the current environments.
 ![ui current view](./docs/ui-current.png)
 
+Showing the choices when starting a new environment.
 ![ui new view](./docs/ui-new.png)
