@@ -27,3 +27,13 @@ The Pulumi CLI must be installed. The Pulumi plugins are determined by the packa
 ## Event service
 
 A Websocket server that waits for the Frontend to make connection. Then it reads state data from Pulumi and sets up timers. It then starts to send messages back to the Frontend. At time-out a stack is deleted using the Pulumi automation API. 
+
+## System architecture
+
+![system architecture](./docs/backabo.png)
+
+## User interface
+
+![ui current view](./docs/ui-current.png)
+
+![ui new view](./docs/ui-new.png)
